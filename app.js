@@ -60,10 +60,12 @@ let filter = {
  * This will set the filters to on or off
  * @param filter
  */  
-
-function updateFilterButton(button){
+function updateFilter(button){
   console.log(button)
   switch(button){
+    case 'default':
+      filterPackages(packages, filter)
+      break;
     case 'heavy':
       filter.heavy == true ? filter.heavy = false : filter.heavy = true
       let element = document.getElementById("filter-heavy")
@@ -80,6 +82,7 @@ function updateFilterButton(button){
           element.classList.add("text-white")      
           console.log('toggled button off')
           }
+          filterPackages(packages, filter)
           break;
 
           case 'priority':
@@ -98,6 +101,7 @@ function updateFilterButton(button){
           element2.classList.add("text-white")    
           console.log('toggled button off')  
           }
+          filterPackages(packages, filter)
           break;
 
           case 'fragile':
@@ -115,21 +119,36 @@ function updateFilterButton(button){
           element3.classList.add("btn-primary")
           element3.classList.add("text-white")      
           }
+          filterPackages(packages, filter)
           break;
 } 
 }
 
-function drawPackages(placeholder){
+function filterPackages(packages, filter){
+  let filteredPackages = packages
+  if (filter.heavy) {
+    filteredPackages = filteredPackages.filter((pkg) => pkg.weight >= 5)
+    
+  }
 
-    filter.heavy ? drawPackages('') : null
+  if (filter.priority) {
+    filteredPackages = filteredPackages.filter((pkg) => pkg.priorityLevel === "express")
+  }
 
+  if (filter.fragile) {
+    filteredPackages = filteredPackages.filter((pkg) => pkg.isFragile)
+  }
+  console.log(filteredPackages)
+  drawPackages(filteredPackages)
+  return filteredPackages
 }
 
+
 function drawPackages(packages) {
- 
-  for (let i = 0; i < packages.length; i++) {
-    document.getElementById('packages').innerHTML += `<li class="list-group-item text-white bg-transparent">${packages[i].to}</li>`
-  }
-  
+  console.log(packages.length);
+  document.getElementById("packages").innerHTML = ""
+  for (let i = 0; i < packages.length; i++){
+      document.getElementById("packages").innerHTML += `<li class=list-group-item> Shipping to:${packages[i].to}, ${packages[i].weight} lbs, Priority level: ${packages[i].priorityLevel}</li>`
+}
 
 }

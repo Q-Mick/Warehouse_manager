@@ -35,7 +35,7 @@
   }
 </style>
 
-<body class=" p-5 debug bg-black">
+<body class=" p-5 bg-black" onload="updateFilter('default')">
   <script src="app.js"></script>
 
   <!-- the main screen will go here -->
@@ -43,11 +43,11 @@
   <div class="row bg-black p-5">
     <div class="col-12 text-center">
       <span class="px-4 display-5 text-white">Filter by:</span>
-      <button onclick="updateFilterButton('heavy')" id="filter-heavy"
+      <button onclick="updateFilter('heavy')" id="filter-heavy"
         class="mb-3 btn btn-primary px-4 display-5 text-white">Heavy</button>
-      <button onclick="updateFilterButton('priority')" id="filter-priority"
+      <button onclick="updateFilter('priority')" id="filter-priority"
         class="mb-3 btn btn-primary px-4 display-5 text-white">Priority</button>
-      <button onclick="updateFilterButton('fragile')" id="filter-fragile"
+      <button onclick="updateFilter('fragile')" id="filter-fragile"
         class="mb-3 btn btn-primary px-4 display-5 text-white">Fragile</button>
     </div>
     <div class="row text-center">
@@ -63,10 +63,11 @@
     <div class="col-12">
       <div class="display-3 p-2 rounded-top bg-dark text-light">
         Packages 📦
+        <!-- <li class="list-group-item">package1 </li> -->
       </div>
       <ul class="list-group" id="packages">
-        <!-- <li class="list-group-item">package1 </li> -->
-      </ul>
+
+    </ul>
 
     </div>
   </div>
